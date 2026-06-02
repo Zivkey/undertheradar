@@ -554,6 +554,19 @@ button { font-family: inherit; }
     0 0 0 4px color-mix(in srgb, var(--accent, #E8001C) 12%, transparent),
     0 0 28px -2px color-mix(in srgb, var(--accent, #E8001C) 45%, transparent);
   animation: feature-pulse 2.6s ease-in-out infinite;
+  transition:
+    color 0.35s ease,
+    letter-spacing 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cta--feature:hover,
+.cta--feature:focus-visible {
+  animation: none;
+  letter-spacing: 0.26em !important;
+  box-shadow:
+    0 0 0 8px color-mix(in srgb, var(--accent, #E8001C) 24%, transparent),
+    0 0 48px 0 color-mix(in srgb, var(--accent, #E8001C) 72%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--accent, #E8001C) 60%, transparent);
 }
 @keyframes feature-pulse {
   0%, 100% {
