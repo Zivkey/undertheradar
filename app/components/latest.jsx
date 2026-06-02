@@ -186,7 +186,39 @@ export default function Latest({ accent = "#E8001C", latest }) {
     if (!videos.length) return;
 
     const ratios = new Map(videos.map((v) => [v, 0]));
+    const pendingReady = new WeakMap();
     let active = null;
+
+    const cancelPending = (v) => {
+      const off = pendingReady.get(v);
+      if (off) {
+        off();
+        pendingReady.delete(v);
+      }
+    };
+
+    const playSafely = (v) => {
+      v.muted = true;
+      if (v.readyState >= 2) {
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+        return;
+      }
+      cancelPending(v);
+      const onReady = () => {
+        cancelPending(v);
+        if (active !== v) return;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      };
+      v.addEventListener("loadeddata", onReady);
+      v.addEventListener("canplay", onReady);
+      pendingReady.set(v, () => {
+        v.removeEventListener("loadeddata", onReady);
+        v.removeEventListener("canplay", onReady);
+      });
+      try { v.load(); } catch {}
+    };
 
     const update = () => {
       let best = null;
@@ -197,16 +229,18 @@ export default function Latest({ accent = "#E8001C", latest }) {
           best = v;
         }
       });
-      if (best === active) return;
-      videos.forEach((v) => {
-        if (v !== best && !v.paused) v.pause();
-      });
-      if (best) {
-        best.muted = true;
-        const p = best.play();
-        if (p && p.catch) p.catch(() => {});
+      if (best === active) {
+        if (best && best.paused) playSafely(best);
+        return;
       }
+      videos.forEach((v) => {
+        if (v !== best) {
+          cancelPending(v);
+          if (!v.paused) v.pause();
+        }
+      });
       active = best;
+      if (best) playSafely(best);
     };
 
     const observer = new IntersectionObserver(
@@ -221,9 +255,18 @@ export default function Latest({ accent = "#E8001C", latest }) {
       try { v.pause(); } catch {}
       observer.observe(v);
     });
+
+    const onVis = () => { if (!document.hidden) update(); };
+    const onShow = () => update();
+    document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("pageshow", onShow);
+
     return () => {
       observer.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("pageshow", onShow);
       videos.forEach((v) => {
+        cancelPending(v);
         try { v.pause(); } catch {}
       });
     };

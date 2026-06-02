@@ -43,6 +43,48 @@ function CornerMeta({ corner, align = "left", k, v, sub, dot, accent }) {
 export default function Hero({ accent = "#E8001C", videoSrc }) {
   const localTime = useClock();
   const heroRef = useRef(null);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    const attemptPlay = () => {
+      if (!v.isConnected) return;
+      v.muted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+
+    const ensure = () => {
+      if (v.paused) {
+        if (v.readyState >= 2) {
+          attemptPlay();
+        } else {
+          const onReady = () => {
+            v.removeEventListener("loadeddata", onReady);
+            v.removeEventListener("canplay", onReady);
+            attemptPlay();
+          };
+          v.addEventListener("loadeddata", onReady);
+          v.addEventListener("canplay", onReady);
+          try { v.load(); } catch {}
+        }
+      }
+    };
+
+    ensure();
+
+    const onVis = () => { if (!document.hidden) ensure(); };
+    const onShow = (e) => { if (e.persisted) ensure(); };
+    document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("pageshow", onShow);
+
+    return () => {
+      document.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("pageshow", onShow);
+    };
+  }, [videoSrc]);
 
   useEffect(() => {
     const root = heroRef.current;
@@ -82,7 +124,15 @@ export default function Hero({ accent = "#E8001C", videoSrc }) {
 
       {videoSrc && (
         <div className="hero-video-wrap">
-          <video src={videoSrc} autoPlay loop muted playsInline />
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          />
         </div>
       )}
 
