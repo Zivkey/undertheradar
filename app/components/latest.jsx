@@ -394,6 +394,7 @@ export default function Latest({ accent = "#E8001C", latest }) {
               size="lg"
               accent={accent}
               className="cta--feature"
+              disableHover
             >
               ENTER THE FULL ARCHIVE →
             </CtaButton>

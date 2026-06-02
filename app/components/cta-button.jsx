@@ -13,6 +13,7 @@ export default function CtaButton({
   accent = "#E8001C",
   fillColor,
   dot = false,
+  disableHover = false,
   children,
   className = "",
   ...rest
@@ -22,6 +23,7 @@ export default function CtaButton({
   const tlRef = useRef(null);
 
   useEffect(() => {
+    if (disableHover) return;
     const el = ref.current;
     const fill = fillRef.current;
     if (!el || !fill) return;
@@ -58,7 +60,7 @@ export default function CtaButton({
       el.removeEventListener("blur", onLeave);
       tl.kill();
     };
-  }, []);
+  }, [disableHover]);
 
   const cls = [
     "cta",
