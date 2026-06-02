@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Footer from "../components/footer";
+import ComingSoonRow from "../components/coming-soon-row";
+
+const COMING_SOON = [{ name: "Eddie Cumberbatch" }];
 
 const ACCENT = "#E8001C";
 
@@ -43,7 +46,7 @@ export default function ArchivePage() {
           Every <span style={{ fontWeight: 300, fontStyle: "italic" }}>signal.</span>
         </div>
         <div className="archive-sub">
-          {String(ARCHIVE.length).padStart(2, "0")} TITLES — SELECT TO WATCH ↗
+          {String(ARCHIVE.length + COMING_SOON.length).padStart(2, "0")} TITLES — SELECT TO WATCH ↗
         </div>
         <div>
           {ARCHIVE.map((c, i) => (
@@ -60,6 +63,14 @@ export default function ArchivePage() {
               <div className="archive-row__name">{c.name}</div>
               <div className="archive-row__cta">WATCH ON YT ↗</div>
             </a>
+          ))}
+          {COMING_SOON.map((c, i) => (
+            <ComingSoonRow
+              key={c.name}
+              index={ARCHIVE.length + i + 1}
+              name={c.name}
+              accent={ACCENT}
+            />
           ))}
         </div>
       </div>
