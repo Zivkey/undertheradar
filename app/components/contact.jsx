@@ -107,10 +107,6 @@ export default function Contact({ accent = "#E8001C" }) {
         </form>
         <div className="contact-channels">
           <div>
-            <div style={{ color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>CONTENT</div>
-            nikola@undertheradar.agency
-          </div>
-          <div>
             <div style={{ color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>CONTACT US AT</div>
             ilija@undertheradar.agency
           </div>
