@@ -551,11 +551,13 @@ button { font-family: inherit; }
   letter-spacing: 0.16em !important;
   background-color: transparent;
   box-shadow: 0 0 18px -6px color-mix(in srgb, var(--accent, #E8001C) 35%, transparent);
+  transform: translateY(0);
   transition:
     color 0.5s ease,
     background-color 0.5s ease,
     border-color 0.5s ease,
-    box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 .cta--feature:hover,
 .cta--feature:focus-visible {
@@ -563,6 +565,7 @@ button { font-family: inherit; }
   background-color: color-mix(in srgb, var(--accent, #E8001C) 10%, transparent);
   border-color: color-mix(in srgb, var(--accent, #E8001C) 90%, #fff) !important;
   box-shadow: 0 0 24px -4px color-mix(in srgb, var(--accent, #E8001C) 50%, transparent);
+  transform: translateY(-3px);
 }
 @media (max-width: 600px) {
   .archive-cta-line { flex-basis: 32px; }
