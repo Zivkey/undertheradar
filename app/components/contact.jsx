@@ -111,11 +111,11 @@ export default function Contact({ accent = "#E8001C" }) {
             nikola@undertheradar.agency
           </div>
           <div>
-            <div style={{ color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>SALES</div>
+            <div style={{ color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>OR CONTACT US AT</div>
             ilija@undertheradar.agency
           </div>
           <div>
-            <div style={{ color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>STUDIO</div>
+            <div style={{ color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>TALK TO US</div>
             UNDISCLOSED · 34.59° N
           </div>
         </div>

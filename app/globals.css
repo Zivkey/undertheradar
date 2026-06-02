@@ -520,6 +520,60 @@ button { font-family: inherit; }
 }
 .cta__label { position: relative; display: inline-flex; align-items: center; gap: 10px; }
 .cta--lg { padding: 18px 32px; font-size: 14px; letter-spacing: 0.1em; }
+
+/* Feature CTA — used for ENTER THE FULL ARCHIVE */
+.archive-cta-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  justify-content: center;
+  max-width: 100%;
+}
+.archive-cta-line {
+  flex: 0 0 64px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent, #E8001C) 55%, transparent) 100%
+  );
+}
+.archive-cta-line:last-child {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent, #E8001C) 55%, transparent) 0%,
+    transparent 100%
+  );
+}
+.cta--feature {
+  padding: 22px 42px !important;
+  font-size: 15px !important;
+  letter-spacing: 0.18em !important;
+  border-width: 1.5px !important;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent, #E8001C) 12%, transparent),
+    0 0 28px -2px color-mix(in srgb, var(--accent, #E8001C) 45%, transparent);
+  animation: feature-pulse 2.6s ease-in-out infinite;
+}
+@keyframes feature-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--accent, #E8001C) 10%, transparent),
+      0 0 24px -2px color-mix(in srgb, var(--accent, #E8001C) 38%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px color-mix(in srgb, var(--accent, #E8001C) 16%, transparent),
+      0 0 36px -2px color-mix(in srgb, var(--accent, #E8001C) 58%, transparent);
+  }
+}
+@media (max-width: 600px) {
+  .archive-cta-line { flex-basis: 32px; }
+  .cta--feature { padding: 18px 28px !important; font-size: 13px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta--feature { animation: none; }
+}
 .cta--solid {
   padding: 18px 28px;
   background: #fff; color: #050505;

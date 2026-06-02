@@ -382,14 +382,23 @@ export default function Latest({ accent = "#E8001C", latest }) {
               fontFamily: "var(--font-mono), monospace",
               fontSize: 11, letterSpacing: "0.32em",
               color: "rgba(255,255,255,0.55)",
-              textTransform: "uppercase", marginBottom: 18,
+              textTransform: "uppercase", marginBottom: 24,
             }}
           >
             // EVERY TITLE, EVERY YEAR
           </div>
-          <CtaButton href="/archive" size="lg" accent={accent}>
-            ENTER THE FULL ARCHIVE →
-          </CtaButton>
+          <div className="archive-cta-wrap">
+            <span className="archive-cta-line" aria-hidden="true" />
+            <CtaButton
+              href="/archive"
+              size="lg"
+              accent={accent}
+              className="cta--feature"
+            >
+              ENTER THE FULL ARCHIVE →
+            </CtaButton>
+            <span className="archive-cta-line" aria-hidden="true" />
+          </div>
         </div>
       </div>
     </section>

@@ -49,6 +49,14 @@ export default function ArchivePage() {
           {String(ARCHIVE.length + COMING_SOON.length).padStart(2, "0")} TITLES — SELECT TO WATCH ↗
         </div>
         <div>
+          {COMING_SOON.map((c, i) => (
+            <ComingSoonRow
+              key={c.name}
+              index={i + 1}
+              name={c.name}
+              accent={ACCENT}
+            />
+          ))}
           {ARCHIVE.map((c, i) => (
             <a
               key={c.name}
@@ -58,19 +66,11 @@ export default function ArchivePage() {
               rel="noopener noreferrer"
             >
               <div className="archive-row__n" style={{ color: ACCENT }}>
-                {String(i + 1).padStart(2, "0")}
+                {String(i + 1 + COMING_SOON.length).padStart(2, "0")}
               </div>
               <div className="archive-row__name">{c.name}</div>
               <div className="archive-row__cta">WATCH ON YT ↗</div>
             </a>
-          ))}
-          {COMING_SOON.map((c, i) => (
-            <ComingSoonRow
-              key={c.name}
-              index={ARCHIVE.length + i + 1}
-              name={c.name}
-              accent={ACCENT}
-            />
           ))}
         </div>
       </div>
