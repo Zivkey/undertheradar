@@ -28,7 +28,7 @@ export default function ArchivePage() {
     <div className="archive">
       <div className="archive-top">
         <div className="archive-top__brand">UNDER THE RADAR</div>
-        <Link className="archive-back" href="/#work">← BACK TO STUDIO</Link>
+        <Link className="archive-back" href="/">← BACK TO STUDIO</Link>
       </div>
       <div className="archive-body">
         <div className="archive-eyebrow" style={{ color: ACCENT }}>

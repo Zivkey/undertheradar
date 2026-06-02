@@ -40,6 +40,12 @@ function CornerMeta({ corner, align = "left", k, v, sub, dot, accent }) {
   );
 }
 
+const scrollToId = (id) => (e) => {
+  e.preventDefault();
+  const el = typeof document !== "undefined" ? document.getElementById(id) : null;
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 export default function Hero({ accent = "#E8001C", videoSrc }) {
   const localTime = useClock();
   const heroRef = useRef(null);
@@ -143,10 +149,10 @@ export default function Hero({ accent = "#E8001C", videoSrc }) {
       <nav className="hero-nav">
         <div className="hero-nav-brand">UNDER THE RADAR</div>
         <div className="hero-nav-links">
-          <a href="#work" style={{ color: "#fff" }}>WORK</a>
-          <a href="#work">STUDIO</a>
-          <a href="#process">PROCESS</a>
-          <a href="#contact">CONTACT</a>
+          <a href="#work" onClick={scrollToId("work")} style={{ color: "#fff" }}>WORK</a>
+          <a href="#work" onClick={scrollToId("work")}>STUDIO</a>
+          <a href="#process" onClick={scrollToId("process")}>PROCESS</a>
+          <a href="#contact" onClick={scrollToId("contact")}>CONTACT</a>
         </div>
       </nav>
 
@@ -172,7 +178,7 @@ export default function Hero({ accent = "#E8001C", videoSrc }) {
           />
           ON AIR — PRESENTLY
         </span>
-        <a href="#work">SCROLL — WORK ↓</a>
+        <a href="#work" onClick={scrollToId("work")}>SCROLL — WORK ↓</a>
       </div>
     </section>
   );
