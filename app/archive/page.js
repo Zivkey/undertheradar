@@ -19,7 +19,7 @@ const ARCHIVE = [
 ];
 
 export const metadata = {
-  title: "Archive | Under the Radar",
+  title: "Under the Radar | Archive",
   description: "Every signal. Full archive of titles.",
 };
 
