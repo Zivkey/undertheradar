@@ -40,27 +40,35 @@ export default function Contact({ accent = "#E8001C" }) {
     email: "",
     project: "",
     message: "",
+    company: "", // honeypot
   });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [error, setError] = useState("");
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    const subject = `[UTR] ${form.project || "New transmission"} — ${
-      form.name || "Anonymous"
-    }`;
-    const body = [
-      `Name: ${form.name}`,
-      `Org: ${form.org}`,
-      `Email: ${form.email}`,
-      `Project: ${form.project}`,
-      "",
-      form.message,
-    ].join("\n");
-    window.location.href = `mailto:hello@undertheradar.agency?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    if (status === "sending") return;
+    setStatus("sending");
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus("error");
+        setError(data.error || "Could not send. Try again.");
+        return;
+      }
+      setStatus("sent");
+      setForm({ name: "", org: "", email: "", project: "", message: "", company: "" });
+    } catch {
+      setStatus("error");
+      setError("Network error. Try again.");
+    }
   };
 
   return (
@@ -101,9 +109,42 @@ export default function Contact({ accent = "#E8001C" }) {
           <Field k="EMAIL" v="hello@yours.com" value={form.email} onChange={set("email")} type="email" />
           <Field k="PROJECT" v="Working title or idea" value={form.project} onChange={set("project")} />
           <Field k="MESSAGE" v="Tell us a little about it…" value={form.message} onChange={set("message")} tall />
-          <CtaButton as="button" type="submit" variant="solid" accent={accent}>
-            {sent ? "SENT — CHECK YOUR MAIL CLIENT ✓" : "TRANSMIT →"}
+          <input
+            type="text"
+            name="company"
+            value={form.company}
+            onChange={set("company")}
+            autoComplete="off"
+            tabIndex={-1}
+            aria-hidden="true"
+            style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+          />
+          <CtaButton
+            as="button"
+            type="submit"
+            variant="solid"
+            accent={accent}
+            disabled={status === "sending"}
+          >
+            {status === "sending"
+              ? "TRANSMITTING…"
+              : status === "sent"
+              ? "SENT — WE'LL BE IN TOUCH ✓"
+              : "TRANSMIT →"}
           </CtaButton>
+          {status === "error" && (
+            <div
+              style={{
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: 11,
+                letterSpacing: "0.12em",
+                color: accent,
+                textTransform: "uppercase",
+              }}
+            >
+              ✕ {error}
+            </div>
+          )}
         </form>
         <div className="contact-channels">
           <div>
