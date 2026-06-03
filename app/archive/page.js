@@ -10,10 +10,10 @@ const ARCHIVE = [
   { name: "Iman Gadzhi",     url: "https://www.youtube.com/watch?v=1-izXBhkiHw" },
   { name: "Flow Ninja",      url: "https://www.youtube.com/watch?v=qmybSF8KqBM&t=46s" },
   { name: "Nino Popovic",    url: "https://www.youtube.com/watch?v=NXP7H7vDO4M&t=228s" },
-  { name: "Jordan Platten",  url: "https://www.youtube.com/watch?v=VvOMlhLwX2U" },
   { name: "Nsima Inyang",    url: "https://www.youtube.com/watch?v=Cl-ZxESkEEA&t=1s" },
   { name: "Under The Radar", url: "https://youtu.be/t7ozOgMESaE" },
   { name: "Sander Stage",    url: "https://www.youtube.com/@SanderStage" },
+  { name: "Jordan Platten",  url: "https://www.youtube.com/watch?v=VvOMlhLwX2U" },
   { name: "Thomas Gonnet",   url: "https://www.youtube.com/@thomasgonnet" },
   { name: "Alex Beck",       url: "https://www.youtube.com/watch?v=TzzK1y7wVPQ" },
 ];
@@ -72,6 +72,17 @@ export default function ArchivePage() {
               <div className="archive-row__cta">WATCH ON YT ↗</div>
             </a>
           ))}
+          <div className="archive-row archive-row--more" style={{ "--accent": ACCENT }}>
+            <div className="archive-row__n archive-row__n--more" style={{ color: ACCENT }}>
+              ∞
+            </div>
+            <div className="archive-row__name archive-row__name--more">
+              And <span style={{ fontWeight: 300, fontStyle: "italic" }}>many more.</span>
+            </div>
+            <div className="archive-row__cta archive-row__cta--more">
+              + COUNTING
+            </div>
+          </div>
         </div>
       </div>
       <Footer accent={ACCENT} />

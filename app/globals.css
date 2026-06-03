@@ -413,6 +413,31 @@ button { font-family: inherit; }
 }
 .archive-row:hover .archive-row__cta { color: #fff; }
 
+/* "And many more" closing row */
+.archive-row.archive-row--more { cursor: default; }
+.archive-row.archive-row--more:hover {
+  padding-left: 10px;
+  background: transparent;
+}
+.archive-row__n--more {
+  font-size: 18px !important;
+  opacity: 0.55;
+  line-height: 1;
+}
+.archive-row__name--more {
+  color: rgba(255,255,255,0.4);
+}
+.archive-row.archive-row--more:hover .archive-row__name--more {
+  color: rgba(255,255,255,0.4);
+}
+.archive-row__cta--more {
+  display: inline-flex; align-items: center; gap: 9px;
+  color: rgba(255,255,255,0.4) !important;
+}
+.archive-row.archive-row--more:hover .archive-row__cta--more {
+  color: rgba(255,255,255,0.4) !important;
+}
+
 /* Coming-soon row variant */
 .archive-row--soon {
   cursor: default;
