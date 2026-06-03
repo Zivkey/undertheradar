@@ -17,7 +17,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Under the Radar — Creative Studio",
+  title: "Under the Radar | Creative Studio",
   description:
     "A small studio working under the radar. Cinematic stories — streaming, documentary, brand.",
 };
