@@ -162,7 +162,7 @@ export default function Hero({ accent = "#E8001C", videoSrc }) {
       <div className="hero-corner-crop" style={{ bottom: 60, right: 32, borderWidth: "0 1px 1px 0" }} />
 
       <CornerMeta corner="tl" k="LOCATION" v="CLASSIFIED" sub="34.5920° N / 106.3652° W" />
-      <CornerMeta corner="tr" align="right" k="STATUS" v="AVAILABLE — Q3" sub="2 SLOTS REMAINING" dot accent={accent} />
+      <CornerMeta corner="tr" align="right" k="STATUS" v="AVAILABLE — Q4" sub="2 SLOTS REMAINING" dot accent={accent} />
       <CornerMeta corner="bl" k="DISCIPLINE" v="CREATIVE STUDIO" sub="DIRECTION · EDITORIAL · DEV" />
       <CornerMeta corner="br" align="right" k="LOCAL TIME" v={localTime} sub="INDEX · UTR — 001" />
 
